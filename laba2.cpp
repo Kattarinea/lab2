@@ -21,7 +21,14 @@ int answer(short int mas[])
 	int summa = 0;
 	int flag = 0;
 
-	
+	//эвристика. если сложить последние разряды чисел, взять остаток отделения, и он не равен остатку от деления результата, то нет смысла находить конкретное значение чисел в выражении.
+	int summ_check = 0;
+	for (int i = 0; i < (strlen(check)-1); i++)
+	{
+		summ_check += mas[check[i] - 65];
+	}
+	if ((summ_check % 10) != ((mas[check[strlen(check) - 1]-65]) % 10))
+	 return 0;
 
 
 	for (int i = 0; i < strlen(vir); i++)
@@ -167,7 +174,8 @@ int main()
 		if (t >= 'A' && t <= 'Z')
 		{
 			int state = t - 65;//получение индекса таблицы, под которым будет храниться буква
-			
+			if (vhod != 0 || index == 0) { if (table[state] == -2)count_letter++;table[state] = -3;  vhod = 0;  }
+			else
 					if (table[state] == -2)//если такой буквы не было
 					{
 						table[state] = -1;//ставится флаг, что в примере есть такая буква
@@ -185,7 +193,9 @@ int main()
 		}
 		
 		vir[index] = t;
-		
+		//добавлено условие для эвристики. занесение в строку последних букв выражения.
+		if ((vir[index] == ' ' && (vir[index - 1] != '=' && vir[index-1] != '+')) || ((vir[index] == '+' || vir[index] == '=') && vir[index - 1] != ' ')) 
+		{ check[check_ind] = vir[index - 1]; check_ind++; }
 		
 	}
 	check[check_ind] = vir[index - 1];
