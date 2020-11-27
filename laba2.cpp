@@ -144,11 +144,13 @@ int main()
 	
 
 
-	for (int i = 0; i < 26; i++)
+	//замена цикла на memset - машинно-независимая оптимизация
+	memset(number, FALSE, 10 * sizeof(number[0]));
+	//развертка цикла
+	for (int i = 0; i < 26; i += 2)
 	{
-		if (i < 10)
-			number[i] = FALSE;
 		table[i] = -2;
+		table[i + 1] = -2;
 	}
 	
 	int vhod = 0;
