@@ -106,7 +106,8 @@ int solution_of_rebus(short int mas[],short int num[])
 	
 
 	for (int i = 0; i < 10; i++)
-	{
+	{/*оптимизация на уровне алгоритма*/
+		if (zn == -3 && i == 0 && num[i] == FALSE) {  i++; }
 		if (num[i] == FALSE)//нахождение цифры, которую еще не присвоили букве
 		{
 
